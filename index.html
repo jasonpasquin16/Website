@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Enhanced Digital Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Define CSS Variables for easy color changes */
+            --primary-color: #0f62fe;
+            --secondary-color: #0043ce;
+            --background-color: #f4f6fb;
+            --text-color: #1b1b1b;
+            --light-blue: #e7efff;
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", Arial, sans-serif;
+            background: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* NEW: General Container Styling */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Headers and Sections */
+        h1, h2, h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 70px 20px;
+            text-align: center;
+            color: #fff;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            color: #fff; /* Override h1 color for header */
+            font-size: 3rem;
+            margin-bottom: 5px;
+        }
+
+        nav {
+            background: #ffffff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000; /* Increased z-index */
+            border-bottom: 1px solid #e2e2e2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        nav a {
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--secondary-color);
+            padding: 10px 14px;
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover {
+            background: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1521737711867-e3b97375f902') center/cover;
+            background-attachment: fixed;
+            padding: 150px 20px;
+            text-align: center;
+            border-radius: 20px;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 60, 160, 0.65); /* Darker overlay */
+        }
+
+        .hero * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h2 {
+            color: #fff;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero h2::after {
+            background: #fff;
+        }
+
+        .cta-btn {
+            background: #ffffff;
+            color: var(--primary-color);
+            padding: 15px 35px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+            display: inline-block;
+            margin-top: 20px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .cta-btn:hover {
+            background: var(--light-blue);
+            transform: scale(1.05);
+        }
+
+        /* FOLDER/GALLERY STYLE (ACADEMICS) */
+        .folder {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .folder h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .folder h3::before {
+            content: '📁';
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        /* NEW: Picture Grid and Item Styling */
+        .academic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .academic-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: #fff;
+        }
+        
+        .academic-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .academic-item img {
+            width: 100%;
+            height: 200px; /* Uniform height for images */
+            object-fit: cover;
+            display: block;
+        }
+        
+        .academic-caption {
+            padding: 15px;
+            background: #fcfcfc;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        
+        .academic-caption p {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+
+        /* ABOUT ME SECTION */
+        .about {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .about-content {
+            flex-grow: 1;
+        }
+
+        /* PROFILE PIC CIRCLE */
+        .profile-pic {
+            width: 240px;
+            min-width: 240px; /* Prevent shrinking */
+            height: 240px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid var(--primary-color);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: transform 0.4s;
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .about h3 {
+            color: var(--primary-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--light-blue);
+            padding-bottom: 5px;
+        }
+        
+        .about ul {
+            list-style: disc;
+            padding-left: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 5px 15px;
+            margin-bottom: 20px;
+        }
+        
+        .about p {
+            margin-bottom: 8px;
+        }
+
+
+        /* CONTACT SECTION */
+        #contact {
+            padding: 40px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 80px; /* Space for the footer/animation */
+        }
+        
+        #contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        #contact label {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-top: 10px;
+        }
+        
+        #contact input[type="text"],
+        #contact input[type="email"],
+        #contact textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 100%;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        #contact input:focus,
+        #contact textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(15, 98, 254, 0.2);
+            outline: none;
+        }
+        
+        #contact button[type="submit"] {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            margin-top: 20px;
+        }
+        
+        #contact button[type="submit"]:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        #contact a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        #contact a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+
+        /* FOOTER & ANIMATION */
+        footer {
+            background: var(--secondary-color);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 50;
+        }
+
+        /* NEW: Bottom Animation - Floating Dots/Particles */
+        .bottom-animation {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .dot {
+            position: absolute;
+            bottom: 0;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float-up 10s infinite linear;
+            opacity: 0;
+        }
+
+        /* Animation for the dots */
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Apply random start times and positions to dots */
+        .dot:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .dot:nth-child(2) { left: 20%; animation-delay: 2s; width: 15px; height: 15px; }
+        .dot:nth-child(3) { left: 35%; animation-delay: 4s; }
+        .dot:nth-child(4) { left: 50%; animation-delay: 1s; width: 8px; height: 8px; }
+        .dot:nth-child(5) { left: 65%; animation-delay: 5s; }
+        .dot:nth-child(6) { left: 80%; animation-delay: 3s; width: 12px; height: 12px; }
+        .dot:nth-child(7) { left: 90%; animation-delay: 6s; }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header {
+                padding: 50px 15px;
+            }
+            
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                padding: 10px 15px;
+                gap: 15px;
+            }
+
+            .hero {
+                padding: 100px 20px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .about {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .about .profile-pic {
+                margin-bottom: 20px;
+            }
+            
+            .about ul {
+                padding-left: 0;
+                list-style: none;
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>My Digital Portfolio</h1>
+    <p>Showcasing my journey, achievements, and creativity.</p>
+</header>
+
+<nav>
+    <a href="#about">About</a>
+    <a href="#academics">Academics</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section id="about" class="container">
+    <h2>About Me</h2>
+    <div class="about">
+        <img class="profile-pic" src="IMAGE/35033677-e2f1-4cd4-a250-059b0de121d0.jpg" alt="My Photo" />
+
+        <div class="about-content">
+            <p>
+                Hello! I'm Jason P. Pasquin Jr., a dedicated student who enjoys learning, creating, 
+                and exploring new skills. This portfolio represents my academic progress, achievements, and technical passions.
+            </p>
+
+            <h3>Personal Information</h3>
+            <ul>
+                <li><strong>Name:</strong> Jason P. Pasquin Jr.</li>
+                <li><strong>Date of Birth:</strong> 09/03/2005</li>
+                <li><strong>Nationality:</strong> Filipino</li>
+                <li><strong>Marital Status:</strong> Single</li>
+                <li><strong>Permanent Address:</strong> Naslo, Pototan, Iloilo</li>
+                <li><strong>Contact Number:</strong> 09482585056</li>
+                <li><strong>Email Address:</strong> pasquin.jason.16@gmail.com</li>
+                <li><strong>Languages Known:</strong> English, Filipino</li>
+            </ul>
+
+            <h3>Skills</h3>
+            <ul>
+                <li>Analyst</li>
+                <li>Photo Editor</li>
+                <li>Video Editor</li>
+                <li>Team Collaboration</li>
+                <li>Troubleshooting</li>
+                <li>Database Management</li>
+                <li>Proficient In MS Word/MS Excel</li>
+            </ul>
+
+            <h3>Education</h3>
+            <p><strong>ELEMENTARY:</strong> NASLO ELEMENTARY SCHOOL</p>
+            <p><strong>SECONDARY:</strong> POTOTAN NATIONAL COMPREHENSIVE HIGHSCHOOL</p>
+            <p><strong>COLLEGE (Current):</strong> WEST VISAYAS STATE UNIVERSITY - POTOTAN CAMPUS</p>
+        </div>
+    </div>
+</section>
+
+<section id="academics" class="container">
+    <h2>Academic Achievements & Awards</h2>
+
+    <div class="folder">
+        <h3>Academic Folder</h3>
+        <div class="academic-grid">
+            
+            <div class="academic-item">
+                <img src="IMAGE/592074905_2848173588717777_3680321089297677063_n.jpg" alt="Academic Award 1" />
+                <div class="academic-caption"><p>Grade 12 With honors</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/592094167_1547878846452851_2829377486490939286_n.jpg" alt="Academic Award 2" />
+                <div class="academic-caption"><p>Best In Basic Cal 4rt quarter</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/592059446_865612973084897_377639959750850167_n.jpg" alt="Academic Award 3" />
+                <div class="academic-caption"><p>Proficiency</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/592048598_3360414524114384_2132257926426107926_n.jpg" alt="Academic Award 4" />
+                <div class="academic-caption"><p>With Honors 2022-2023</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/592014520_805012999198787_8563240893738506258_n.jpg" alt="Academic Award 5" />
+                <div class="academic-caption"><p>Best in Physical Science</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/591669062_2214486742408791_5051347558704605808_n.jpg" alt="Academic Award 6" />
+                <div class="academic-caption"><p>Best in Basic Cal 3rd quarter</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/591553076_3333254956856101_6560783636061690478_n.jpg" alt="Academic Award 7" />
+                <div class="academic-caption"><p>3rd Quarter With Honors</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/591453357_3977324035854323_5984358897726036733_n.jpg" alt="Academic Award 8" />
+                <div class="academic-caption"><p>Grade 11 With Honors</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/591305152_1159479226349941_1458827420486671014_n.jpg" alt="Academic Award 9" />
+                <div class="academic-caption"><p>With Honors 2023-2024</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/594009462_827584233438825_8258981565956982992_n.jpg" alt="Academic Award 10" />
+                <div class="academic-caption"><p>With Honors 2022- 2023</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/592374172_1375077710960836_4151728087299011683_n.jpg" alt="Academic Award 11" />
+                <div class="academic-caption"><p>Best in Enterprenuership</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/591276489_1354013269532163_8117845976317686601_n.jpg" alt="Academic Award 12" />
+                <div class="academic-caption"><p>ROTC</p></div> </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/591091801_1193265206327672_3119056659698034985_n.jpg" alt="Academic Award 13" />
+                <div class="academic-caption"><p>Best in Empowerment Technologies</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/590866178_707794155723386_8433674008365196443_n.jpg" alt="Academic Award 14" />
+                <div class="academic-caption"><p>With Honors 1st Quarter</p></div>
+            </div>
+            
+            <div class="academic-item">
+                <img src="IMAGE/590660828_865613626135038_1089824895304061539_n.jpg" alt="Academic Award 15" />
+                <div class="academic-caption"><p>Dean's Lister Award </p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="container">
+    <h2>Contact Me</h2>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email" required />
+
+        <label for="message">Message:</label>
+        <textarea id="message" rows="5" placeholder="Type your message"></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
+
+    <p style="margin-top: 30px; text-align:center;">
+        Follow me on:
+        <a href="https://www.facebook.com/jason.pasquin.9?mibextid=ZbWKwL" target="_blank">Facebook</a> |
+        <a href="https://www.instagram.com/jass_lvsyu?igsh=MW1ja2p3bHljajRiaQ==" target="_blank">Instagram</a>
+    </p>
+</section>
+
+<footer>
+    © 2025 My Digital Portfolio — All Rights Reserved
+    <div class="bottom-animation">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+</footer>
+
+</body>
+</html>
